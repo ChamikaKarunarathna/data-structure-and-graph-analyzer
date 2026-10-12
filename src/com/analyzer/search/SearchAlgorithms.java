@@ -65,17 +65,20 @@ public class SearchAlgorithms {
         int foundIndex = -1;
 
         while (low <= high) {
-            steps++; // Iteration / comparison check
+            steps++; // Loop boundary check (low <= high)
             int mid = low + (high - low) / 2;
 
-            steps++; // Value comparison
+            steps++; // Equality comparison (sortedArray[mid] == target)
             if (sortedArray[mid] == target) {
                 foundIndex = mid;
                 break;
-            } else if (sortedArray[mid] < target) {
-                low = mid + 1;
             } else {
-                high = mid - 1;
+                steps++; // Ordering comparison (sortedArray[mid] < target)
+                if (sortedArray[mid] < target) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
             }
         }
 
