@@ -2,6 +2,7 @@ package com.analyzer;
 
 import com.analyzer.array.CustomArray;
 import com.analyzer.benchmark.PerformanceTracker;
+import com.analyzer.linkedlist.CustomLinkedList;
 import com.analyzer.search.SearchAlgorithms;
 import com.analyzer.util.InputHelper;
 import java.util.Random;
@@ -12,6 +13,7 @@ import java.util.Random;
  */
 public class Main {
     private static final CustomArray sharedArray = new CustomArray();
+    private static final CustomLinkedList sharedLinkedList = new CustomLinkedList();
 
     public static void main(String[] args) {
         // Pre-populate initial sample data for demonstration ease
@@ -38,7 +40,7 @@ public class Main {
                     handleQueueMenuPlaceholder();
                     break;
                 case 4:
-                    handleLinkedListMenuPlaceholder();
+                    handleLinkedListMenu();
                     break;
                 case 5:
                     handleSearchMenu();
@@ -283,15 +285,6 @@ public class Main {
         InputHelper.pause();
     }
 
-    private static void handleLinkedListMenuPlaceholder() {
-        System.out.println("---------------------------------------------");
-        System.out.println("   LINKED LIST OPERATIONS (MODULE ASSIGNED)  ");
-        System.out.println("Assigned Member: A.P. Poorna Chathuranga (23DA2-0072)");
-        System.out.println("Status: Pending implementation on branch feature/linked-list");
-        System.out.println("---------------------------------------------");
-        InputHelper.pause();
-    }
-
     private static void handleGraphMenuPlaceholder() {
         System.out.println("---------------------------------------------");
         System.out.println("      GRAPH OPERATIONS (MODULE ASSIGNED)     ");
@@ -310,7 +303,101 @@ public class Main {
         System.out.println("==========================================================================");
         System.out.println("Current Array Snapshot:");
         sharedArray.display();
+        System.out.println("Current Linked List Snapshot:");
+        sharedLinkedList.display();
         System.out.println();
         PerformanceTracker.displayComparisonTable();
+    }
+
+    private static void handleLinkedListMenu() {
+        boolean inSubMenu = true;
+        while (inSubMenu) {
+            System.out.println("\n---------- LINKED LIST OPERATIONS -----------");
+            System.out.println("1. Insert at Tail (Append)");
+            System.out.println("2. Insert at Head");
+            System.out.println("3. Insert at Specific Position");
+            System.out.println("4. Delete by Value");
+            System.out.println("5. Delete by Position");
+            System.out.println("6. Search Element");
+            System.out.println("7. Display Linked List");
+            System.out.println("8. Clear List");
+            System.out.println("9. Return to Main Menu");
+            System.out.println("---------------------------------------------");
+
+            int choice = InputHelper.readInt("Enter your choice: ");
+            System.out.println();
+
+            switch (choice) {
+                case 1: {
+                    int value = InputHelper.readInt("Enter integer value to append: ");
+                    sharedLinkedList.insertAtTail(value);
+                    System.out.println("Inserted " + value + " successfully at the tail.");
+                    sharedLinkedList.display();
+                    break;
+                }
+                case 2: {
+                    int value = InputHelper.readInt("Enter integer value to insert: ");
+                    sharedLinkedList.insertAtHead(value);
+                    System.out.println("Inserted " + value + " successfully at the head.");
+                    sharedLinkedList.display();
+                    break;
+                }
+                case 3: {
+                    int index = InputHelper.readInt("Enter insertion index (0 to " + sharedLinkedList.size() + "): ");
+                    int value = InputHelper.readInt("Enter integer value to insert: ");
+                    if (sharedLinkedList.insertAtPosition(index, value)) {
+                        System.out.println("Inserted " + value + " successfully at index " + index + ".");
+                    }
+                    sharedLinkedList.display();
+                    break;
+                }
+                case 4: {
+                    int value = InputHelper.readInt("Enter value to delete: ");
+                    if (sharedLinkedList.deleteByValue(value)) {
+                        System.out.println("Value " + value + " deleted successfully.");
+                    }
+                    sharedLinkedList.display();
+                    break;
+                }
+                case 5: {
+                    if (sharedLinkedList.isEmpty()) {
+                        sharedLinkedList.deleteAtPosition(0);
+                    } else {
+                        int index = InputHelper.readInt("Enter deletion index (0 to " + (sharedLinkedList.size() - 1) + "): ");
+                        if (sharedLinkedList.deleteAtPosition(index)) {
+                            System.out.println("Element at index " + index + " deleted successfully.");
+                        }
+                    }
+                    sharedLinkedList.display();
+                    break;
+                }
+                case 6: {
+                    int target = InputHelper.readInt("Enter value to search: ");
+                    int index = sharedLinkedList.search(target);
+                    if (index >= 0) {
+                        System.out.println("Found " + target + " at index " + index + ".");
+                    } else {
+                        System.out.println("Value " + target + " not found in linked list.");
+                    }
+                    break;
+                }
+                case 7:
+                    sharedLinkedList.display();
+                    break;
+                case 8:
+                    sharedLinkedList.clear();
+                    System.out.println("Linked list cleared.");
+                    break;
+                case 9:
+                    inSubMenu = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select 1-9.");
+                    break;
+            }
+            if (inSubMenu) {
+                InputHelper.pause();
+            }
+        }
     }
 }
