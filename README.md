@@ -101,15 +101,42 @@ The system allows users to interactively test and benchmark operations on:
 - Git
 
 ### Compilation & Execution
-```bash
+```powershell
 # Clone the repository
 git clone https://github.com/<your-username>/data-structure-and-graph-analyzer.git
 cd data-structure-and-graph-analyzer
 
 # Compile all source files
-javac -d bin src/**/*.java
+javac -d bin -sourcepath src src/com/analyzer/Main.java
 
 # Run the console application
 java -cp bin com.analyzer.Main
 ```
-*(Exact path can be adjusted once packages are finalized)*
+
+### Graph Component (Member 4)
+
+Implemented by H.G.R. Shehan (23DA2-0108) in `src/com/analyzer/graph/CustomGraph.java`.
+Main menu option 6 opens the graph submenu. Edges can be directed or undirected;
+missing endpoints are created automatically, duplicate edges are ignored, and
+negative integer vertex labels and self-loops are supported. Vertices and
+neighbors are displayed and traversed in insertion order.
+
+Choose graph option 6 to replace the current graph with the six-vertex sample.
+From vertex 1, BFS visits `[1, 2, 3, 4, 5, 6]` and DFS visits
+`[1, 2, 4, 6, 5, 3]`. Both take 20 counted steps: six visited vertices plus
+14 adjacency entries for seven undirected edges. Press Enter at each pause.
+Graph option 8 returns to the main menu; main option 7 displays benchmark history.
+
+Traversals only visit the reachable subgraph and run in O(V + E) time with O(V)
+auxiliary space. DFS uses an explicit stack to support deep graphs. Each valid
+traversal records its algorithm, step count, nanosecond duration, and visit order.
+Timing excludes console output and benchmark recording. Invalid starting vertices
+print a message without adding a benchmark. Clearing the graph retains history.
+
+Compile and run the standalone regression tests (no additional dependencies):
+
+```powershell
+javac -d bin -sourcepath src src/com/analyzer/Main.java
+javac -cp bin -d bin tests/com/analyzer/graph/CustomGraphTest.java
+java -cp bin com.analyzer.graph.CustomGraphTest
+```
