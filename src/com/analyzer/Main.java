@@ -77,13 +77,12 @@ public class Main {
     private static void printMainMenu() {
         System.out.println("\n=============================================");
         System.out.println("       DATA STRUCTURE & GRAPH ANALYZER       ");
-        System.out.println("=============================================");
         System.out.println("1. Array Operations");
-        System.out.println("2. Stack Operations (Member 2)");
-        System.out.println("3. Queue Operations (Member 2)");
-        System.out.println("4. Linked List Operations (Member 3)");
+        System.out.println("2. Stack Operations");
+        System.out.println("3. Queue Operations");
+        System.out.println("4. Linked List Operations");
         System.out.println("5. Searching Operations");
-        System.out.println("6. Graph Operations (Member 4)");
+        System.out.println("6. Graph Operations");
         System.out.println("7. Performance Comparison");
         System.out.println("8. Display All Results");
         System.out.println("9. Exit");
@@ -455,10 +454,13 @@ public class Main {
         System.out.println("==========================================================================");
         System.out.println("Current Array Snapshot:");
         sharedArray.display();
-        System.out.println("Current Linked List Snapshot:");
+        System.out.println("\nCurrent Stack Snapshot:");
+        sharedStack.display();
+        System.out.println("\nCurrent Queue Snapshot:");
+        sharedQueue.display();
+        System.out.println("\nCurrent Linked List Snapshot:");
         sharedLinkedList.display();
-        System.out.println();
-        System.out.println("Current Graph Snapshot:");
+        System.out.println("\nCurrent Graph Snapshot:");
         sharedGraph.displayGraph();
         System.out.println();
         PerformanceTracker.displayComparisonTable();
