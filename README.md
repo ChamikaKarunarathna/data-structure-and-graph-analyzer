@@ -18,12 +18,12 @@ Developed in strict accordance with the **CIT300 Practical Assignment 2** requir
 
 ## 2. Team Members & Responsibilities
 
-| Student Name | Student ID | Assigned Responsibility | Git Branch |
-| :--- | :--- | :--- | :--- |
-| **C.K.L. Karunarathna (Lead)** | **23DA2-0096** | Project Initiation, Architecture, Array Operations, Searching Algorithms, System Integration | `do1`, `fix2` |
-| **K.D.P. Jayathilaka** | **23DA2-0105** | Stack Operations, Queue Operations (Circular Array), Linear Data Structure Underflow/Overflow Handling | `do2` |
-| **A.P. Poorna Chathuranga** | **23DA2-0072** | Linked List Implementation (Dynamic Nodes), Boundary Validation, Traversal Step Tracking | `do3` |
-| **H.G.R. Shehan** | **23DA2-0108** | Graph Representation (Adjacency List), Graph Traversals (BFS & DFS), Standalone Regression Tests | `do4`, `do5` |
+| Student Name | Student ID | Assigned Responsibility |
+| :--- | :--- | :--- |
+| **C.K.L. Karunarathna (Lead)** | **23DA2-0096** | Project Initiation, Architecture, Array Operations, Searching Algorithms, System Integration |
+| **K.D.P. Jayathilaka** | **23DA2-0105** | Stack Operations, Queue Operations (Circular Array), Linear Data Structure Underflow/Overflow Handling |
+| **A.P. Poorna Chathuranga** | **23DA2-0072** | Linked List Implementation (Dynamic Nodes), Boundary Validation, Traversal Step Tracking |
+| **H.G.R. Shehan** | **23DA2-0108** | Graph Representation (Adjacency List), Graph Traversals (BFS & DFS), Standalone Regression Tests |
 
 ---
 
