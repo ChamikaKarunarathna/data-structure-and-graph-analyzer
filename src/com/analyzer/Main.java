@@ -2,6 +2,7 @@ package com.analyzer;
 
 import com.analyzer.array.CustomArray;
 import com.analyzer.benchmark.PerformanceTracker;
+import com.analyzer.graph.CustomGraph;
 import com.analyzer.linkedlist.CustomLinkedList;
 import com.analyzer.queue.CustomQueue;
 import com.analyzer.search.SearchAlgorithms;
@@ -15,6 +16,7 @@ import java.util.Random;
  */
 public class Main {
     private static final CustomArray sharedArray = new CustomArray();
+    private static final CustomGraph sharedGraph = new CustomGraph();
     private static final CustomLinkedList sharedLinkedList = new CustomLinkedList();
     private static final CustomStack sharedStack = new CustomStack();
     private static final CustomQueue sharedQueue = new CustomQueue();
@@ -50,7 +52,7 @@ public class Main {
                     handleSearchMenu();
                     break;
                 case 6:
-                    handleGraphMenuPlaceholder();
+                    handleGraphMenu();
                     break;
                 case 7:
                     PerformanceTracker.displayComparisonTable();
@@ -383,13 +385,65 @@ public class Main {
         }
     }
 
-    private static void handleGraphMenuPlaceholder() {
-        System.out.println("---------------------------------------------");
-        System.out.println("      GRAPH OPERATIONS (MODULE ASSIGNED)     ");
-        System.out.println("Assigned Member: H.G.R. Shehan (23DA2-0108)");
-        System.out.println("Status: Pending implementation on branch feature/graph-component");
-        System.out.println("---------------------------------------------");
-        InputHelper.pause();
+    // Member 4: H.G.R. Shehan (23DA2-0108)
+    private static void handleGraphMenu() {
+        while (true) {
+            System.out.println("\n--------------- GRAPH OPERATIONS ------------");
+            System.out.println("1. Add Vertex");
+            System.out.println("2. Add Edge");
+            System.out.println("3. Display Graph Structure");
+            System.out.println("4. Breadth-First Search (BFS) Traversal");
+            System.out.println("5. Depth-First Search (DFS) Traversal");
+            System.out.println("6. Load Sample Graph (replaces current graph)");
+            System.out.println("7. Clear Graph");
+            System.out.println("8. Return to Main Menu");
+            System.out.println("---------------------------------------------");
+
+            int choice = InputHelper.readInt("Enter your choice: ");
+            System.out.println();
+            switch (choice) {
+                case 1:
+                    int vertex = InputHelper.readInt("Enter vertex (integer): ");
+                    System.out.println(sharedGraph.addVertex(vertex)
+                            ? "Vertex " + vertex + " added."
+                            : "Vertex " + vertex + " already exists.");
+                    break;
+                case 2:
+                    int source = InputHelper.readInt("Enter source vertex: ");
+                    int destination = InputHelper.readInt("Enter destination vertex: ");
+                    int direction = InputHelper.readIntInRange(
+                            "Edge type (1 = directed, 2 = undirected): ", 1, 2);
+                    boolean added = sharedGraph.addEdge(source, destination, direction == 1);
+                    System.out.println(added
+                            ? "Edge added. Missing vertices were created automatically."
+                            : "Edge already exists.");
+                    break;
+                case 3:
+                    sharedGraph.displayGraph();
+                    break;
+                case 4:
+                    sharedGraph.bfs(InputHelper.readInt("Enter BFS starting vertex: "));
+                    break;
+                case 5:
+                    sharedGraph.dfs(InputHelper.readInt("Enter DFS starting vertex: "));
+                    break;
+                case 6:
+                    sharedGraph.loadSampleGraph();
+                    System.out.println("Sample graph loaded. Try BFS and DFS from vertex 1.");
+                    sharedGraph.displayGraph();
+                    break;
+                case 7:
+                    sharedGraph.clear();
+                    System.out.println("Graph cleared.");
+                    break;
+                case 8:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please select 1-8.");
+                    break;
+            }
+            InputHelper.pause();
+        }
     }
 
     // -------------------------------------------------------------
@@ -403,6 +457,9 @@ public class Main {
         sharedArray.display();
         System.out.println("Current Linked List Snapshot:");
         sharedLinkedList.display();
+        System.out.println();
+        System.out.println("Current Graph Snapshot:");
+        sharedGraph.displayGraph();
         System.out.println();
         PerformanceTracker.displayComparisonTable();
     }
