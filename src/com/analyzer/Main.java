@@ -22,13 +22,6 @@ public class Main {
     private static final CustomQueue sharedQueue = new CustomQueue();
 
     public static void main(String[] args) {
-        // Pre-populate initial sample data for demonstration ease
-        sharedArray.insert(25);
-        sharedArray.insert(10);
-        sharedArray.insert(45);
-        sharedArray.insert(70);
-        sharedArray.insert(15);
-
         boolean running = true;
         while (running) {
             printMainMenu();
