@@ -2,7 +2,9 @@ package com.analyzer;
 
 import com.analyzer.array.CustomArray;
 import com.analyzer.benchmark.PerformanceTracker;
+import com.analyzer.queue.CustomQueue;
 import com.analyzer.search.SearchAlgorithms;
+import com.analyzer.stack.CustomStack;
 import com.analyzer.util.InputHelper;
 import java.util.Random;
 
@@ -12,6 +14,8 @@ import java.util.Random;
  */
 public class Main {
     private static final CustomArray sharedArray = new CustomArray();
+    private static final CustomStack sharedStack = new CustomStack();
+    private static final CustomQueue sharedQueue = new CustomQueue();
 
     public static void main(String[] args) {
         // Pre-populate initial sample data for demonstration ease
@@ -32,10 +36,10 @@ public class Main {
                     handleArrayMenu();
                     break;
                 case 2:
-                    handleStackMenuPlaceholder();
+                    handleStackMenu();
                     break;
                 case 3:
-                    handleQueueMenuPlaceholder();
+                    handleQueueMenu();
                     break;
                 case 4:
                     handleLinkedListMenuPlaceholder();
@@ -263,24 +267,118 @@ public class Main {
     }
 
     // -------------------------------------------------------------
-    // PLACEHOLDERS FOR TEAM MEMBERS
     // -------------------------------------------------------------
-    private static void handleStackMenuPlaceholder() {
-        System.out.println("---------------------------------------------");
-        System.out.println("      STACK OPERATIONS (MODULE ASSIGNED)     ");
-        System.out.println("Assigned Member: K.D.P. Jayathilaka (23DA2-0105)");
-        System.out.println("Status: Pending implementation on branch feature/stack-and-queue");
-        System.out.println("---------------------------------------------");
-        InputHelper.pause();
+    // 2. STACK SUBMENU (MEMBER 2)
+    // -------------------------------------------------------------
+    private static void handleStackMenu() {
+        boolean inSubMenu = true;
+        while (inSubMenu) {
+            System.out.println("\n--------------- STACK OPERATIONS ------------");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Peek");
+            System.out.println("4. Display Stack");
+            System.out.println("5. Return to Main Menu");
+            System.out.println("---------------------------------------------");
+
+            int choice = InputHelper.readInt("Enter your choice: ");
+            System.out.println();
+
+            switch (choice) {
+                case 1:
+                    int value = InputHelper.readInt("Enter integer value to push: ");
+                    sharedStack.push(value);
+                    System.out.println("Pushed " + value + " onto the stack.");
+                    sharedStack.display();
+                    break;
+                case 2:
+                    Integer poppedValue = sharedStack.pop();
+                    if (poppedValue == null) {
+                        System.out.println("Stack underflow: cannot pop from an empty stack.");
+                    } else {
+                        System.out.println("Popped value: " + poppedValue);
+                        sharedStack.display();
+                    }
+                    break;
+                case 3:
+                    Integer topValue = sharedStack.peek();
+                    if (topValue == null) {
+                        System.out.println("Stack is empty; there is no top value.");
+                    } else {
+                        System.out.println("Top value: " + topValue);
+                    }
+                    break;
+                case 4:
+                    sharedStack.display();
+                    break;
+                case 5:
+                    inSubMenu = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select 1-5.");
+                    break;
+            }
+            if (inSubMenu && choice != 4) {
+                InputHelper.pause();
+            }
+        }
     }
 
-    private static void handleQueueMenuPlaceholder() {
-        System.out.println("---------------------------------------------");
-        System.out.println("      QUEUE OPERATIONS (MODULE ASSIGNED)     ");
-        System.out.println("Assigned Member: K.D.P. Jayathilaka (23DA2-0105)");
-        System.out.println("Status: Pending implementation on branch feature/stack-and-queue");
-        System.out.println("---------------------------------------------");
-        InputHelper.pause();
+    // -------------------------------------------------------------
+    // 3. QUEUE SUBMENU (MEMBER 2)
+    // -------------------------------------------------------------
+    private static void handleQueueMenu() {
+        boolean inSubMenu = true;
+        while (inSubMenu) {
+            System.out.println("\n--------------- QUEUE OPERATIONS ------------");
+            System.out.println("1. Enqueue");
+            System.out.println("2. Dequeue");
+            System.out.println("3. Peek / Front");
+            System.out.println("4. Display Queue");
+            System.out.println("5. Return to Main Menu");
+            System.out.println("---------------------------------------------");
+
+            int choice = InputHelper.readInt("Enter your choice: ");
+            System.out.println();
+
+            switch (choice) {
+                case 1:
+                    int value = InputHelper.readInt("Enter integer value to enqueue: ");
+                    sharedQueue.enqueue(value);
+                    System.out.println("Enqueued " + value + " into the queue.");
+                    sharedQueue.display();
+                    break;
+                case 2:
+                    Integer dequeuedValue = sharedQueue.dequeue();
+                    if (dequeuedValue == null) {
+                        System.out.println("Queue is empty; cannot dequeue.");
+                    } else {
+                        System.out.println("Dequeued value: " + dequeuedValue);
+                        sharedQueue.display();
+                    }
+                    break;
+                case 3:
+                    Integer frontValue = sharedQueue.peek();
+                    if (frontValue == null) {
+                        System.out.println("Queue is empty; there is no front value.");
+                    } else {
+                        System.out.println("Front value: " + frontValue);
+                    }
+                    break;
+                case 4:
+                    sharedQueue.display();
+                    break;
+                case 5:
+                    inSubMenu = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select 1-5.");
+                    break;
+            }
+            if (inSubMenu && choice != 4) {
+                InputHelper.pause();
+            }
+        }
     }
 
     private static void handleLinkedListMenuPlaceholder() {
